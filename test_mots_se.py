@@ -114,7 +114,6 @@ with torch.no_grad():
                                                       with_uv=args['with_uv'], n_sigma=args["n_sigma"] if "n_sigma" in args.keys() else 1)
 
         instance_map_np = instance_map.numpy()
-        # cv2.imwrite("/home/xubb/1.jpg", instance_map.numpy() * 50)
         save_pickle2(os.path.join(args['save_dir'], base), instance_map_np)
 
     # eval on args['save_dir']
