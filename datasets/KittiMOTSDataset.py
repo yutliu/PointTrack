@@ -195,12 +195,12 @@ class MOTSTrackCarsValOffset(Dataset):
             ids = self.SEQ_IDS_VAL
             timestamps = self.TIMESTEPS_PER_SEQ
             self.image_root = os.path.join(kittiRoot, 'images')
-            self.mots_root = os.path.join(systemRoot, 'SpatialEmbeddings/car_SE_val_prediction')
+            self.mots_root = os.path.join(rootDir, 'transition/car_SE_val_prediction')
         else:
             ids = self.SEQ_IDS_TEST
             timestamps = self.TIMESTEPS_PER_SEQ_TEST
             self.image_root = os.path.join(kittiRoot, 'testing/image_02/')
-            self.mots_root = os.path.join(systemRoot, 'SpatialEmbeddings/car_SE_test_prediction')
+            self.mots_root = os.path.join(rootDir, 'transition/car_SE_val_prediction')
 
         print('use ', self.mots_root)
         self.batch_num = 2
@@ -228,7 +228,6 @@ class MOTSTrackCarsValOffset(Dataset):
         self.offsetMax = 128.0
         self.category = category
         self.category_embedding = np.array(category_embedding, dtype=np.float32)
-        print(self.mots_root)
 
     def __len__(self):
         return self.real_size

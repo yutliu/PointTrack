@@ -1,6 +1,5 @@
 """
-Author: Zhenbo Xu
-Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
+config SpatialEmbedding Network
 """
 import copy
 import os
@@ -31,7 +30,7 @@ args = dict(
         }
     },
 
-    save_dir='./car_SE_val_prediction/',
+    save_dir='./transition/car_SE_val_prediction/',
     dataset= {
         'name': 'mots_cars_val',
         'kwargs': {

@@ -1,6 +1,5 @@
 """
-Author: Zhenbo Xu
-Licensed under the CC BY-NC 4.0 license (https://creativecommons.org/licenses/by-nc/4.0/)
+config PointTrack Network
 """
 import copy
 import os
@@ -17,9 +16,9 @@ args = dict(
     display=False,
 
     save=True,
-    save_dir='./tracks_car_pointtrack_val/',
-    checkpoint_path='./car_finetune_tracking/checkpoint.pth',
-    # checkpoint_path='./pointTrack_weights/PointTrack.pthCar',
+    save_dir='./transition/tracks_car_pointtrack_val/',
+    # checkpoint_path='./car_finetune_tracking/checkpoint.pth',
+    checkpoint_path='./pointTrack_weights/PointTrack.pthCar',
     run_eval=True,
 
     dataset= {

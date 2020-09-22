@@ -51,29 +51,15 @@ model = get_model(args['model']['name'], args['model']['kwargs'])
 model = torch.nn.DataParallel(model).to(device)
 
 # load snapshot
-if os.path.exists(args['checkpoint_path']):
+path_exist = os.path.exists(args['checkpoint_path'])
+if path_exist:
     state = torch.load(args['checkpoint_path'])
     model.load_state_dict(state['model_state_dict'], strict=True)
     print('Load dict from %s' % args['checkpoint_path'])
 else:
-    assert(False, 'checkpoint_path {} does not exist!'.format(args['checkpoint_path']))
+    assert path_exist, 'checkpoint_path {} does not exist!'.format(args['checkpoint_path'])
     print(args['checkpoint_path'])
-
 model.eval()
-
-
-def prepare_img(image):
-    if isinstance(image, Image.Image):
-        return image
-
-    if isinstance(image, torch.Tensor):
-        image.squeeze_()
-        image = image.numpy()
-
-    if isinstance(image, np.ndarray):
-        if image.ndim == 3 and image.shape[0] in {1, 3}:
-            image = image.transpose(1, 2, 0)
-        return image
 
 
 dColors = [(128, 0, 0), (170, 110, 40), (128, 128, 0), (0, 128, 128), (0, 0, 128), (230, 25, 75), (245, 130, 48)
@@ -96,7 +82,7 @@ with torch.no_grad():
         else:
             masks = sample['masks'][0]
             xyxys = sample['xyxys']
-            embeds = model(points, None, xyxys, infer=True)
+            embeds = model(points=points, labels=None, xyxys=xyxys, infer=True)
             embeds = embeds.cpu().numpy()
             masks = masks.numpy()
 
@@ -107,8 +93,21 @@ with torch.no_grad():
 
 if 'run_eval' in args.keys() and args['run_eval']:
     # run eval
-    save_val_dir = args['save_dir'].split('/')[1]
+    save_val_dir = args['save_dir']
     p = subprocess.run([pythonPath, "-u", "eval.py",
                         os.path.join(rootDir, save_val_dir), kittiRoot + "instances", "val.seqmap"],
                                    stdout=subprocess.PIPE, cwd=rootDir + "datasets/mots_tools/mots_eval")
     print(p.stdout.decode("utf-8"))
+
+def prepare_img(image):
+    if isinstance(image, Image.Image):
+        return image
+
+    if isinstance(image, torch.Tensor):
+        image.squeeze_()
+        image = image.numpy()
+
+    if isinstance(image, np.ndarray):
+        if image.ndim == 3 and image.shape[0] in {1, 3}:
+            image = image.transpose(1, 2, 0)
+        return image

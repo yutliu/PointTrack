@@ -69,6 +69,7 @@ You can download pretrained models from the above links. Save these weight file 
 $ python -u test_mots_se.py car_test_se_to_save
 ```
 The segmentation result will be saved according to the config file **repoRoot**/config_mots/car_test_se_to_save.py.
+This command will auto run next command.
 
 2.To test PointTrack on the instance segmentation results:
 ```

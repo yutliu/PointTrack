@@ -9,5 +9,5 @@ category_embedding = [[0.9479751586914062, 0.4561353325843811, 0.167076289653778
 
 systemRoot = "/home/liuyuting/Code/"
 kittiRoot = os.path.join(systemRoot, "PointTrack/data/KITTI/")
-rootDir = os.path.join(systemRoot, 'PointTrack')
+rootDir = os.path.join(systemRoot, 'PointTrack/')
 pythonPath = os.path.join(systemRoot, "../anaconda3/envs/PointTrack/bin/python")

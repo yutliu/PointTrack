@@ -126,7 +126,7 @@ class TrackHelper(object):
         self.current_video = subfolder
 
     def export_last_video(self):
-        print('Writing ', self.current_video)
+        print('\nWriting ', self.current_video)
         out_filename = os.path.join(self.save_dir, self.current_video + ".txt")
         with open(out_filename, "w") as f:
             for track in self.all_tracks:
